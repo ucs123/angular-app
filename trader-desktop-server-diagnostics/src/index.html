@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Server Diagnostics</title>
+
+    <link rel="stylesheet" href="vendor/bootstrap.min.css"/>
+    <link rel="stylesheet" href="vendor/bootstrap-theme.min.css"/>
+
+    <style>
+        body {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body ng-app="diagnostics" ng-controller="DiagnosticsController">
+
+<div class="container">
+    <div class="row">
+        <div class="well">
+            <h2>Server Diagnostics</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
+            <h3>Users</h3>
+            <table class="table table-condensed table-striped">
+                <tr ng-repeat="user in users">
+                    <td>
+                        <b>{{ user.id }}</b>
+                    </td>
+                    <td>
+                        <small>{{ user.name }}</small>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-sm-3">
+            <h3>Instruments</h3>
+            <table class="table table-condensed table-striped">
+                <tr ng-repeat="inst in instruments">
+                    <td>
+                        <b>{{ inst.symbol }}</b>
+                    </td>
+                    <td>
+                        <small>{{ inst.name }}</small>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-sm-7">
+            <p>
+                <h3>Orders</h3>
+                <button class="btn btn-sm btn-default" ng-click="createOrder()">Create</button>
+                <button class="btn btn-sm btn-default" ng-click="refreshOrders()">Refresh</button>
+                <button class="btn btn-sm btn-default" ng-click="clearOrders()">Clear</button>
+            </p>
+
+            <table class="table table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Time</th>
+                        <th>Side</th>
+                        <th>Symbol</th>
+                        <th>Qty</th>
+                        <th>Placed</th>
+                        <th>Executed</th>
+                        <th>Limit</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="order in orders track by order.id">
+                        <td>
+                            <small>{{order.id}}</small>
+                        </td>
+                        <td>{{order.creationTime | date:'hh:mm' }}</td>
+                        <td>{{order.side}}</td>
+                        <td>
+                            <b>{{order.symbol}}</b>
+                        </td>
+                        <td>{{order.quantity }}</td>
+                        <td>{{order.quantityPlaced }}</td>
+                        <td>{{order.quantityExecuted }}</td>
+                        <td>{{order.limitPrice | currency}}</td>
+                        <td>{{order.status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Libs -->
+<script src="vendor/lodash.min.js"></script>
+<script src="vendor/angular.min.js"></script>
+<script src="vendor/angular-resource.min.js"></script>
+<script src="vendor/angular-sanitize.min.js"></script>
+<script src="vendor/socket.js"></script>
+<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+
+<!-- App -->
+<script src="app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "trader-desktop-server-diagnostics",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/archfirst/trader-desktop-server-diagnostics"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-connect": "^0.8.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "jshint-stylish": "^0.4.0",
+    "load-grunt-tasks": "^0.6.0",
+    "time-grunt": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=0.10.30"
+  }
+}

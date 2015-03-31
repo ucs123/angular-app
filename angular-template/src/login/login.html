@@ -1,0 +1,15 @@
+<section id="login-view" class="container-fluid panel-bg">
+    <h1>Log In</h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <form>
+                <div class="form-group">
+                    <select ng-model="vm.userName" ng-options="user.name as user.name for user in vm.users">
+                        <option value=""> Select User </option>                   
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-black" ng-click="vm.setUserName();">Login</button>
+            </form>
+        </div>
+    </div>
+</section>

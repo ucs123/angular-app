@@ -1,0 +1,84 @@
+<section id="dashboard-view" class="container-fluid panel-bg">
+
+    <div class="dashboard-header clearfix">
+        <div class="clearfix">
+            <h1 class="pull-left">Trader Desktop</h1>
+            <div class="pull-right"><span>{{ vm.userName; }}</span> <a href="#">Sign Out</a></div>
+        </div>
+        <div class="clearfix">
+            <ul class="list-inline pull-left">
+                <li><button class="btn btn-black" ng-click="vm.tradeModel();">Trade</button></li>
+                <li><button class="btn btn-black" ng-click="vm.clearOrders();">Delete All</button></li>
+                <li><button class="btn btn-black" ng-click="vm.refreshOrders();">Referesh</button></li>
+            </ul>
+            <ul class="list-inline pull-right">
+                <li ng-class="{active:tab===1}"><a href="#" ng-click="tab = 1">Table View</a></li>
+                <li ng-class="{active:tab===2}"><a href="#" ng-click="tab = 2">Chart View</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 main">
+            <div class="row">
+                    <div class="table-responsive" ng-show="tab === 1">
+                        <table class="table table-striped order">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>creation Time</th>
+                                    <th>side</th>
+                                    <th>symbol</th>
+                                    <th>quantity</th>
+                                    <th>Placed</th>
+                                    <th>Executed</th>
+                                    <th>limit Price</th>
+                                    <th>priority</th>
+                                    <th>status</th>
+                                    <th>trader</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr data-ng-repeat="order in vm.orders">
+                                   <td>{{order.id}}</td>
+                                    <td>{{order.creationTime | date:'hh:mm' }}</td>
+                                    <td>{{order.side}}</td>
+                                    <td>{{order.symbol}}</td>
+                                    <td>{{order.quantity }}</td>
+                                    <td>{{order.quantityPlaced }}</td>
+                                    <td>{{order.quantityExecuted }}</td>
+                                    <td>{{order.limitPrice | currency}}</td>
+                                    <td>{{order.priority}}</td>
+                                    <td>{{order.status}}</td>
+                                    <td>{{order.traderId}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+                <div class="col-sm-12 chart-column" ng-show="tab === 2">
+                    <div data-at-barchart data-assets="vm.orders" class="chart-container"></div>
+                </div>
+        </div><!-- main -->
+
+    </div><!-- row -->
+
+</section>
+<div id="tradeModal" class="modal fade bs-example-modal-sm">
+       <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Create Multiple trades</h4>
+            <div class="modal-body">
+                <p>Enter number of trades</p>
+                 <p><input type="text" ng-model="vm.tradenumber" /></p>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="vm.createOrder();">Create</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+        </div>
+</div>
